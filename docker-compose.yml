@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: lef-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: lef
+      POSTGRES_PASSWORD: lef
+      POSTGRES_DB: lef
+    ports:
+      - "5432:5432"
+    volumes:
+      - lef_pg:/var/lib/postgresql/data
+
+  mongo:
+    image: mongo:7
+    container_name: lef-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - lef_mongo:/data/db
+
+volumes:
+  lef_pg:
+  lef_mongo:
